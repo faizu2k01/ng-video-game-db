@@ -70,12 +70,18 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "ssl": true
+          },
           "configurations": {
             "production": {
               "browserTarget": "ng-video-game-db:build:production"
+              
             },
             "development": {
               "browserTarget": "ng-video-game-db:build:development"
+              
+              
             }
           },
           "defaultConfiguration": "development"

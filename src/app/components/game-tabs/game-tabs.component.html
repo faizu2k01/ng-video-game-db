@@ -3,8 +3,8 @@
         <mat-tab label="About">
             <p *ngIf="game.parent_platforms?.length" class="game-tabs-par">
                 Platforms:
-                <span *ngFor="let game of game.parent_platforms; let last = last">
-                    {{game.platform.name}} <span *ngIf="!last">, </span>
+                <span *ngFor="let item of game.parent_platforms; let last = last">
+                    {{item.name}} <span *ngIf="!last">, </span>
                 </span>
             </p>
             <p class="game-tabs-par">
@@ -38,8 +38,8 @@
         </mat-tab>
 
         <mat-tab label="Trailers">
-            <video class="game-trailer" *ngFor="let item of game.trailers"  class="game-trailer" controls src="{{item.data.max}}">
-                <source  src="{{item.data.max}}">
+            <video class="game-trailer" *ngFor="let item of game.trailers"  class="game-trailer" controls src="{{item.preview}}">
+                <source  src="{{item.preview}}">
                 Your browser does not support the video tag.
             </video>
         </mat-tab>

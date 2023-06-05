@@ -17,6 +17,31 @@ export interface Game{
 }
 
 
+
+export interface GameDetailDTO {
+    id: number;
+    name: string;
+    released: string;
+    backgound_url: string;
+    description: string;
+    metacritic_url: string;
+    metacritic?:number;
+    website: string;
+    genres: Genre[];
+    parent_platforms: Parent_platforms[];
+    publishers: Publishers[];
+    screenshots: Screenshots[];
+    trailers: Trailer[];
+}
+
+export interface GameHome{
+    id:number;
+    background_image:string;
+    name:string;
+    description:string;
+
+}
+
 export interface APIResponse<T>{
     results:Array<T>;
 }
@@ -50,9 +75,11 @@ interface Screenshots{
 }
 
 interface Trailer{
-    data:{
-        max:string;
-    };
+    data:any;
+    gameId:number; 
+    id: number;
+    name: string;
+    preview: string;
     
 }
 
@@ -66,3 +93,11 @@ interface platforms{
         slug:string,
     }
 }
+
+
+interface Parent_platforms{
+    id:number,
+    name:string,
+    gameId:number
+}
+

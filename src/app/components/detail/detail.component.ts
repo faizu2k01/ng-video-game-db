@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Game } from 'src/app/modals';
+import { Game, GameDetailDTO } from 'src/app/modals';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class DetailComponent implements OnInit ,OnDestroy {
   gameId!:string;
   routeSub!:Subscription;
   gameSub!:Subscription;
-  game!:Game;
+  game!:GameDetailDTO;
+  gameLoading:boolean=false;
 
 
   constructor(private activatedRoute:ActivatedRoute,
@@ -23,9 +24,11 @@ export class DetailComponent implements OnInit ,OnDestroy {
               private sanitizer: DomSanitizer
               ){}
   ngOnInit(): void {
+    this.gameLoading=true;
     this.routeSub = this.activatedRoute.params.subscribe((params:Params)=>{
       this.gameId= params['id'];
       this.getGameDetails(this.gameId);
+      this.gameLoading=false;
     })
 
   }
@@ -48,10 +51,12 @@ else return '#ef4655';
 
 
 public getGameDetails(id:string):void{
-  this.gameSub = this.httpService.getGameDetails(id).subscribe((gameResp:Game)=>{
+  this.gameLoading=false;
+  this.gameSub = this.httpService.getGameDetails(id).subscribe((gameResp:GameDetailDTO)=>{
     if(gameResp) this.game = gameResp;
+    this.gameLoading=true;
     setTimeout(()=>{
-      this.gameRating = this.game.metacritic;
+      this.gameRating = this.game.metacritic !== undefined ? this.game.metacritic:34;
     },1000);
   })
 }

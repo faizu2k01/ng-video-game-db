@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Game } from 'src/app/modals';
+import { Game, GameDetailDTO } from 'src/app/modals';
 
 @Component({
   selector: 'app-game-tabs',
@@ -8,7 +8,7 @@ import { Game } from 'src/app/modals';
 })
 export class GameTabsComponent implements OnInit {
  
-  @Input() game!:Game;
+  @Input() game!:GameDetailDTO;
   constructor(){}
  
  
